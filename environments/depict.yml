@@ -1,4 +1,4 @@
-name: depict
+name: GAMMA_depict
 channels:
 - bioconda
 dependencies:

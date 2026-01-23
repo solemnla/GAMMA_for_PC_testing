@@ -1,4 +1,4 @@
-name: py39
+name: GAMMA_ML
 channels:
 - bioconda
 dependencies:

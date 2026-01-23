@@ -1,4 +1,4 @@
-name: ldsc
+name: GAMMA_ldsc
 channels:
 - bioconda
 dependencies:

@@ -1,4 +1,4 @@
-name: NetworkX
+name: GAMMA_NetworkX
 channels:
 - bioconda
 dependencies:

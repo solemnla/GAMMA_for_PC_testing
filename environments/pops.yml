@@ -1,4 +1,4 @@
-name: pops
+name: GAMMA_pops
 channels:
 - bioconda
 dependencies:
