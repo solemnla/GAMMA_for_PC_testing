@@ -2,11 +2,11 @@
 
 # Create base R environment
 echo "Creating base R environment..."
-conda create -n GAMMA_r_sh r-base=4.3.1 -c conda-forge -y
+conda create -n GAMMA_r r-base=4.3.1 -c conda-forge -y
 
 # Activate environment
 echo "Activating GAMMA_r environment..."
-conda activate GAMMA_r_sh
+conda activate GAMMA_r
 
 # Install base packages batch 1
 echo "Installing base packages (batch 1)..."
