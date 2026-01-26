@@ -11,3 +11,10 @@ conda env create -f ./environments/r.yml && \
     /bin/bash -c "source activate GAMMA_r && R -e 'devtools::install_github(\"ZikunY/CARMA\")' && \
     R -e 'remotes::install_github(\"gabraham/plink2R\", subdir=\"plink2R\", ref=\"master\")' && \
     R -e 'remotes::install_github(\"cotsapaslab/jlim\", subdir=\"jlimR\", ref=\"master\")'"
+
+# bash ./environments/gamma_r.sh && \
+#     /bin/bash -c "source activate GAMMA_r && \
+#     R -e 'install.packages(c(\"htmltools\", \"remotes\"), repos=\"https://cran.r-project.org\")' && \
+#     R -e 'devtools::install_github(\"ZikunY/CARMA\")' && \
+#     R -e 'remotes::install_github(\"gabraham/plink2R\", subdir=\"plink2R\", ref=\"master\")' && \
+#     R -e 'remotes::install_github(\"cotsapaslab/jlim\", subdir=\"jlimR\", ref=\"master\")'"
