@@ -1,15 +1,16 @@
 # Input
 input:
-  trait: "demo"
-  gwas_raw: "${GAMMA_HOME}/sharedata/GWAS_summary/01_Public/01_cojo/DIAMANTE_EUR_T2D_2022_NG.txt"
-  gwas: "${GAMMA_HOME}/sharedata/GWAS_summary/01_Public/01_cojo/DIAMANTE_EUR_T2D_2022_NG.txt"
-  output: "${GAMMA_HOME}/guoyazhou/GAMMA_git_data"
+  trait: "T2D_chr11"
+  GAMMA_HOME: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing"
+  gwas_raw: "${GAMMA_HOME}/data/GWAS_T2D_chr11.txt"
+  gwas: "${GAMMA_HOME}/data/GWAS_T2D_chr11.txt"
+  output: "${GAMMA_HOME}/output" 
 script:
-  work_path: "${GAMMA_HOME}/guoyazhou/GAMMA_git"
-  path: "${GAMMA_HOME}/guoyazhou/GAMMA_github/gamma-script/scripts"
+  work_path: "${GAMMA_HOME}/sbatch_test"
+  path: "${GAMMA_HOME}/scripts"
 yaml:
-  template: "${GAMMA_HOME}/guoyazhou/GAMMA_github/gamma-script/deploy/HPC/GAMMA/template.yaml"
-  config: "${GAMMA_HOME}/guoyazhou/GAMMA_git/yaml_file/demo.yaml"
+  template: "${GAMMA_HOME}/deploy/GAMMA.yaml"
+  config: "${GAMMA_HOME}/deploy/GAMMA.yaml"
 # Not changed ---- :
 environment:
   R_421: "GAMMA_r"
