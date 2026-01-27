@@ -14,7 +14,7 @@ library(data.table)
 
 gene_bed=fread(gencode_tss,head=F,stringsAsFactors=F,data.table=F)
 if(is.null(CARMA_bed_file)){
-  CARMA_bed_file=paste0(OUTPUT,"/CARMA/summary/",trait_name,"_CARMA.bed")
+  CARMA_bed_file=paste0(OUTPUT,"/Wu_adj/summary/",trait_name,".bed")
 }
 
 INFILE=CARMA_bed_file

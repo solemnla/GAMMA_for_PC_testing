@@ -18,11 +18,13 @@ mkdir -p ${OUTPUT}/MAGIC/results
 # ------------------------------------------------------------------------
 #  MAGIC analysis
 # ------------------------------------------------------------------------
-magic_functions_file=`yq .magic.R_functions "${CONFIG}"`
+magic_functions_file=`yq .software.magic "${CONFIG}"`
 gencode_file=`yq .gene.gencode "${CONFIG}"`
+
 CpG_link_file=`yq .magic.CpG_link "${CONFIG}"`
 hQTL_link_file=`yq .magic.hQTL_link "${CONFIG}"`
 caQTL_link_file=`yq .magic.caQTL_link "${CONFIG}"`
+
 reference_bim_file=`yq .reference.reference_all_bim "${CONFIG}"`
 QTL_name_list_file=`yq .magic.QTL_name_list "${CONFIG}"`
 
@@ -43,20 +45,3 @@ Rscript ${SCRIPT_DIR}/L2G/MAGIC.R \
     ${GWAS_DATA} \
     ${reference_bim_file} \
     ${QTL_name_list_file}
-
-
-Rscript ${SCRIPT_DIR}/L2G/MAGIC_HEIDI.R \
-    ${trait_name} \
-    ${OUTPUT} \
-    ${magic_functions_file} \
-    ${gencode_file} \
-    ${CpG_link_file} \
-    ${hQTL_link_file} \
-    ${caQTL_link_file} \
-    ${GWAS_DATA} \
-    ${reference_bim_file} \
-    ${QTL_name_list_file}
-
-
-
-

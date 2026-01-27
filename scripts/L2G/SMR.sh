@@ -21,7 +21,6 @@ mkdir -p ${OUTPUT}/SMR/SMR_Portal
 
 SMR=`yq .software.smr "${CONFIG}"`
 REFERENCE=`yq .reference.reference_bfile "${CONFIG}"`
-REFERENCE_bld=`yq .reference.reference_bld "${CONFIG}"`
 QTL_list=`yq .magic.QTL_list "${CONFIG}"`
 
 maf=`yq .smr.maf "${CONFIG}"`
@@ -81,20 +80,19 @@ fi
 # 218-224: hQTL
 # 225-229: caQTL
 
-# ----
-# old QTL list:
-# **** Here we take qtl as a unit.
-# QTL_list=`yq .smr.QTL_list "${CONFIG}"`
-# 1-78: eQTL
-# 79-129: sQTL
-# 130-131: mQTL
-# 132-136: pQTL
 
-qtl_i=${SLURM_ARRAY_TASK_ID}
+# qtl_i=${SLURM_ARRAY_TASK_ID}
 
-qtl_name=`awk -F "\t" -v row=$qtl_i 'NR==row {print $1}' $QTL_list`
-qtl_data=`awk -F "\t" -v row=$qtl_i 'NR==row {print $2}' $QTL_list`
-qtl_chr=`awk -F "\t" -v row=$qtl_i 'NR==row {print $3}' $QTL_list`
+qtl_num=`cat $QTL_list | wc -l`
+for qtl_i in $(seq 1 $qtl_num); do
+
+
+    qtl_name=`awk -F "\t" -v row=$qtl_i 'NR==row {print $1}' $QTL_list`
+    qtl_data=`awk -F "\t" -v row=$qtl_i 'NR==row {print $2}' $QTL_list`
+    qtl_chr=`awk -F "\t" -v row=$qtl_i 'NR==row {print $3}' $QTL_list`
+
+    echo "Processing QTL $qtl_i / $qtl_num ..."
+    echo "QTL name: $qtl_name"
 
 
 if [ -z "$qtl_name" ]; then
@@ -105,27 +103,16 @@ fi
 SMR_summary_file="${OUTPUT}/SMR/summary/${trait_name}_${qtl_name}_chrALL.msmr"
 if [ ! -f "${SMR_summary_file}" ] || [ ! -s "${SMR_summary_file}" ]; then
 
-for i in $(seq 1 22); do
-
+# for i in $(seq 1 22); do
+    chr=`yq .input.chr "${CONFIG}"`
+    i=${chr}
     if [ "$qtl_chr" = "TRUE" ]; then
         QTL_data="${qtl_data}${i}"
     else
         QTL_data="${qtl_data}"
     fi
 
-    if [ "$run_magic_index" = "TRUE" ]; then
-        # MAGIC 模式使用 --bld 参数
-        cmd="${SMR} --bld ${REFERENCE_bld}_chr${i} \
-            --gwas-summary ${GWAS_DATA} \
-            --beqtl-summary ${QTL_data} \
-            --probe-chr ${i} \
-            --maf ${maf} \
-            --peqtl-smr ${peqtl_smr} \
-            --peqtl-heidi ${peqtl_heidi} \
-            --thread-num 4 \
-            --out ${OUTPUT}/SMR/detail/${trait_name}_${qtl_name}_chr${i}"
-    else
-        # SMR 模式使用 --bfile 参数
+
         cmd="${SMR} --bfile ${REFERENCE}_chr${i} \
             --gwas-summary ${GWAS_DATA} \
             --beqtl-summary ${QTL_data} \
@@ -135,7 +122,6 @@ for i in $(seq 1 22); do
             --peqtl-heidi ${peqtl_heidi} \
             --thread-num 4 \
             --out ${OUTPUT}/SMR/detail/${trait_name}_${qtl_name}_chr${i}"
-    fi
 
     if [ "$smr_multi_index" = "TRUE" ]; then
         cmd="${cmd} --smr-multi"
@@ -147,23 +133,9 @@ for i in $(seq 1 22); do
 
     echo "Executing command:"
     echo "$cmd"
-    $cmd &
+    $cmd 
 
-    pids+=($!)
-    if (( i % ${batch_num} == 0 )); then
-        for pid in "${pids[@]}"; do
-            wait $pid || [ $? -eq 99 ] && true || exit $?
-        done
-        pids=()
-    fi
-
-done
-
-# wait for all jobs to finish
-for pid in "${pids[@]}"; do
-    wait $pid || [ $? -eq 99 ] && true || exit $?
-done
-
+# done
 
 # No matter smr or smr-multi, we will final output the "_chrALL.msmr" file
 smr_detail_files=(${OUTPUT}/SMR/detail/${trait_name}_${qtl_name}_chr*smr)
@@ -177,3 +149,5 @@ fi
 else
     echo "File already exists."
 fi
+
+done 

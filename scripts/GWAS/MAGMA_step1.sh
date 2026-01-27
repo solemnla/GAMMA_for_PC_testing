@@ -21,7 +21,9 @@ REFERENCE=`yq .reference.reference_bfile_GRCh37 "${CONFIG}"`
 gene_annot=`yq .magma.gene_annot "${CONFIG}"`
 
 # ----
-i=${SLURM_ARRAY_TASK_ID}
+chr=`yq .input.chr "${CONFIG}"`
+i=${chr}
+# i=${SLURM_ARRAY_TASK_ID}
 ${MAGMA} \
 	--bfile ${REFERENCE}_chr${i} \
 	--gene-annot ${gene_annot} \

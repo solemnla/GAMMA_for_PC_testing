@@ -5,6 +5,7 @@ set -e
 #  Input
 # ------------------------------------------------------------------------
 CONFIG=$1
+
 SCRIPT_DIR=`yq .script.path "${CONFIG}"`
 GWAS_DATA=`yq .input.gwas "${CONFIG}"`
 trait_name=`yq .input.trait "${CONFIG}"`

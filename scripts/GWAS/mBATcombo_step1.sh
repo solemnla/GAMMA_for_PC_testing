@@ -22,7 +22,9 @@ REFERENCE=`yq .reference.reference_bfile "${CONFIG}"`
 gene_list=`yq .mBAT.gene_list "${CONFIG}"`
 
 # ----
-i=${SLURM_ARRAY_TASK_ID}
+chr=`yq .input.chr "${CONFIG}"`
+i=${chr}
+# i=${SLURM_ARRAY_TASK_ID}
 ${GCTA} --bfile ${REFERENCE}_chr${i} \
 	--mBAT-combo ${GWAS_DATA} \
 	--mBAT-gene-list ${gene_list} \

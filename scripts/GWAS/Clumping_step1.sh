@@ -5,6 +5,7 @@ set -e
 #  Input
 # ------------------------------------------------------------------------
 CONFIG=$1
+
 SCRIPT_DIR=`yq .script.path "${CONFIG}"`
 GWAS_DATA=`yq .input.gwas "${CONFIG}"`
 trait_name=`yq .input.trait "${CONFIG}"`
@@ -27,7 +28,9 @@ plink1_9=`yq .software.plink1_9 "${CONFIG}"`
 REFERENCE=`yq .reference.reference_bfile "${CONFIG}"`
 
 # ----
-i=${SLURM_ARRAY_TASK_ID}
+chr=`yq .input.chr "${CONFIG}"`
+i=${chr}
+# i=${SLURM_ARRAY_TASK_ID}
 ${plink1_9} \
     --bfile ${REFERENCE}_chr${i} \
     --chr ${i} \

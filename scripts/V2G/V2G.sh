@@ -16,19 +16,20 @@ mkdir -p ${OUTPUT}/V2G/feature
 mkdir -p ${OUTPUT}/V2G/plot
 
 # ------------------------ CARMA results summary --------------------------------------
-CARMA_bed_file="${OUTPUT}/CARMA/summary/${trait_name}_CARMA.bed"
-CARMA_CS_file="${OUTPUT}/CARMA/summary/${trait_name}_CARMA.CS"
+# CARMA_bed_file="${OUTPUT}/CARMA/summary/${trait_name}_CARMA.bed"
+# CARMA_CS_file="${OUTPUT}/CARMA/summary/${trait_name}_CARMA.CS"
 
-# Wu_adj_bed_file="${OUTPUT}/Wu_adj/summary/${trait_name}.bed"
-# Wu_adj_CS_file="${OUTPUT}/Wu_adj/summary/${trait_name}.CS"
+Wu_adj_bed_file="${OUTPUT}/Wu_adj/summary/${trait_name}.bed"
+Wu_adj_CS_file="${OUTPUT}/Wu_adj/summary/${trait_name}.CS"
 
 
-bed_file=${CARMA_bed_file}
-CS_file=${CARMA_CS_file}
-# bed_file=${Wu_adj_bed_file}
-# CS_file=${Wu_adj_CS_file}
+# bed_file=${CARMA_bed_file}
+# CS_file=${CARMA_CS_file}
+bed_file=${Wu_adj_bed_file}
+CS_file=${Wu_adj_CS_file}
 
-GWAS_LOCUS_file="${OUTPUT}/COJO/summary/${trait_name}.locus"
+# GWAS_LOCUS_file="${OUTPUT}/COJO/summary/${trait_name}.locus"
+GWAS_LOCUS_file="${OUTPUT}/Clumping/summary/${trait_name}.locus"
 # ------------------------------------------------------------------------
 #  V2G analysis
 # ------------------------------------------------------------------------
