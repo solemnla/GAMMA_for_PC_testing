@@ -29,7 +29,8 @@ QTL_clumped_list=`yq .mr.GSMR_QTL_clumped_list "${CONFIG}"`
 
 # -------------------------------
 # QTL clumped results
-qtl_i=${SLURM_ARRAY_TASK_ID}
+# qtl_i=${SLURM_ARRAY_TASK_ID}
+qtl_i=6
 
 qtl_name=`awk -F "\t" -v row=$qtl_i 'NR==row {print $1}' $QTL_clumped_list`
 qtl_clumpled_file=`awk -F "\t" -v row=$qtl_i 'NR==row {print $2}' $QTL_clumped_list`

@@ -26,11 +26,19 @@ source activate ${env}
 
 
 # ----
-qtl_i=${SLURM_ARRAY_TASK_ID}
+# qtl_i=${SLURM_ARRAY_TASK_ID}
+# for qtl_i in $(seq 1 $(wc -l < ${QTL_list})); do
+# qtl_i = 49 only for Whole Blood
+qtl_i=49
 GTEx_tissue=`head -n ${qtl_i} ${QTL_list} | tail -n1 | awk -F "\t" '{print $1}'`
 
+echo "Starting FUSION analysis for QTL set ${qtl_i} ..."
+echo "${GTEx_tissue}"
 
-for i in $(seq 1 22); do
+# for i in $(seq 1 22); do
+chr=`yq .input.chr "${CONFIG}"`
+i=${chr}
+
 
 SECONDS=0
 
@@ -50,7 +58,8 @@ echo "FUSION analysis results have been written into [$result_file]"
 echo "FUSION analysis completed: $current_time"
 echo "FUSION analysis computational time: $(($elapsed_time / 3600)):$((($elapsed_time / 60) % 60)):$(($elapsed_time % 60))"
 
-done
+# done
+# done
 
 awk 'NR==1 || FNR>1' ${OUTPUT}/FUSION/detail/${trait_name}.GTExv8.ALL.${GTEx_tissue}.*.dat >  ${OUTPUT}/FUSION/summary/${trait_name}.GTExv8.ALL.${GTEx_tissue}.chrALL.dat
 rm  ${OUTPUT}/FUSION/detail/${trait_name}.GTExv8.ALL.${GTEx_tissue}.*.dat

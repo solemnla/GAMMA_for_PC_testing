@@ -25,6 +25,7 @@ munge_sumstats=`yq .fusion.munge_sumstats "${CONFIG}"`
 LDSC_resources_dir=`yq .fusion.ldsc_resources_dir "${CONFIG}"`
 
 # ----
+which python
 python ${munge_sumstats} \
 	--sumstats ${GWAS_DATA} \
 	--out ${OUTPUT}/FUSION/GWAS_munged/${trait_name} \

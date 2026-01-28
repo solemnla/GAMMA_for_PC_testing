@@ -2,6 +2,7 @@
 input:
   trait: "T2D_chr11"
   chr: "11"
+  mesh_id: "D003924"
   gwas_raw: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/data/GWAS_T2D_chr11.txt"
   gwas: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/data/GWAS_T2D_chr11.txt"
   output: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/results" 
@@ -36,7 +37,7 @@ software:
   coloc: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/softwares/COLOC.R"
   magma: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/softwares/magma"
   pops: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/softwares/pops.py"
-  depict: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/softwares/depict.py"
+  depict: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/data/depict/src/python/depict.py"
   bedtools: "/storage/yangjianLab/guoyazhou/anaconda3/bin/bedtools"
   R_functions: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/softwares/CommonFunc.r"
   magic: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/softwares/magic_functions.r"
@@ -81,54 +82,33 @@ magic:
   caQTL_link: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/data/magic/caQTL_consensus3.link"
 coloc:
   QTL_dir: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/data/coloc"
-  
-
-
-
-l2g:
-  L2G_column_file: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/guoyazhou/GAMMA_github/gamma-script/scripts/L2G/L2G_column.r"
-  QTL_name_mapping_file: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/guoyazhou/GAMMA_git/L2G/QTL_data/L2G_QTL_name_mapping.txt"
-  gsmr_pQTL_file: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/guoyazhou/GAMMA_git_data/GSMR/data/gsmr_pQTL.txt"
-  pQTL_epi_file: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/sharedata/molecular_QTL/pQTL/freeze1/merged_pQTL_plasma/merged_pQTL_plasma_5pQTL.epi"
-
+fusion:
+  munge_sumstats: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/data/fusion/munge_sumstats.py"
+  ldsc_resources_dir: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/data/fusion/LDSC_resource"
+  LDREF: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/data/fusion/LDREF"
+  QTL_list: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/data/fusion/FUSION_QTL_name.txt"
 mr:
   enable: False
   batch_num: 10
   MR_snp_min: 3
-  QTL_clumped_list: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/guoyazhou/GAMMA_github/gamma-script/scripts/L2G/MR/QTL_clumped/QTL_clumped_list.txt"
-  GSMR_QTL_clumped_list: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/guoyazhou/GAMMA_github/gamma-script/scripts/L2G/MR/QTL_clumped/GSMR_QTL_clumped_list.txt"
-
-fusion:
-  munge_sumstats: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/guoyazhou/software/LDSC/ldsc/munge_sumstats.py"
-  ldsc_resources_dir: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/sharedata/LDSC_resource"
-  LDREF: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/guoyazhou/software/FUSION/fusion_twas-master/LDREF"
-  QTL_list: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/guoyazhou/GAMMA_git/L2G/QTL_data/FUSION_QTL_name.txt"
-
-gsmr:
-  reffile: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/guoyazhou/GAMMA_git_data/GSMR/data/gsmr_ref_data_ukb.txt"
-  expofile: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/guoyazhou/GAMMA_git_data/GSMR/data/gsmr_pQTL.txt"
-  expo_dir: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/guoyazhou/GAMMA_git_data/GSMR/exposure_data"
+  GSMR_QTL_clumped_list: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/data/mr/GSMR_QTL_clumped_list.txt"
+l2g:
+  L2G_column_file: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/data/l2g/L2G_column.r"
+  QTL_name_mapping_file: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/data/l2g/L2G_QTL_name_mapping.txt"
+  gsmr_pQTL_file: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/data/l2g/gsmr_pQTL.txt"
+  pQTL_epi_file: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/data/l2g/merged_pQTL_plasma_5pQTL.epi"
 pops:
-  gene_annot: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/guoyazhou/software/PoPS/pops-master/example/data/utils/gene_annot_jun10.txt"
-  pops_feature: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/guoyazhou/software/PoPS/pops-master/pops_all_features_munged/all_pops_features"
-  control_feature: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/guoyazhou/software/PoPS/pops-master/example/data/utils/features_jul17_control.txt"
+  gene_annot: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/data/pops/gene_annot_jun10.txt"
+  pops_feature: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/data/pops/pops_all_features_munged/all_pops_features"
+  control_feature: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/data/pops/features_jul17_control.txt"
 depict:
-  snp_loc_GRCh37: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/guoyazhou/software/DEPICT/snp_loc_b37"
-  cfg_demo: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/guoyazhou/GAMMA_git_data/DEPICT/cfg/demo.cfg"
+  snp_loc_GRCh37: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/data/depict/snp_loc_b37"
+  cfg_demo: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/data/depict/demo.cfg"
 rwr_ppr:
-  ppi_file: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/sharedata/Network_data/PPI/PPI_all.csv"
+  ppi_file: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/data/rwr_ppr/PPI_all.csv"
 gamma:
-  pharmaprojects: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/guoyazhou/github/Network/data/clinical_targets/target_indication/Pharmaprojects_2024_05_07.txt"
-  pharmaprojects_nelson: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/guoyazhou/GAMMA_git/clinical_success_rate/Pharmaprojects_Nelson_2022.txt"
-  pharmaprojects_0507_shufeng: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/sunshufeng/gamma_v4/data/pharmap_processed.csv"
+  pharmaprojects: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/data/gamma/Pharmaprojects_2024_05_07.txt"
+  pharmaprojects_nelson: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/data/gamma/Pharmaprojects_Nelson_2022.txt"
+  pharmaprojects_0507_shufeng: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/data/gamma/pharmap_processed.csv"
 mesh:
-  gwas_mesh: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/guoyazhou/GAMMA_git/GWAS_trait_list/trait_mapping_latest.txt"
-# Model
-model_data:
-  omim: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/sunshufeng/gamma_v4/data/OMIM_processed.csv"
-  clinvar: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/sunshufeng/gamma_v4/data/clinvar.csv"
-  mgi: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/sunshufeng/gamma_v4/data/MGI_processed.csv"
-  gene_features: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/sunshufeng/gamma_v4/0.0.3_gene_features.csv"
-model_model:
-  model: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/sunshufeng/gamma_v4/0.0.1_valid_feature_model.joblib"
-  feature: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/sunshufeng/gamma_v4/0.0.2_feature_list.txt"
+  gwas_mesh: "/storage/yangjianLab/guoyazhou/github/GAMMA_for_PC_testing/data/gamma/trait_mapping_latest.txt"

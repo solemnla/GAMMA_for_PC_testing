@@ -28,7 +28,8 @@ reference_all_bim_file=`yq .reference.reference_all_bim "${CONFIG}"`
 # MeSH id need to be updated
 # GWAS trait MeSH id list.
 gwas_mesh=`yq .mesh.gwas_mesh "${CONFIG}"` 
-MeSH_id=`cat ${gwas_mesh} | awk -F "\t" -v trait_name="${trait_name}" '{if ($1 == trait_name) print $3}'`
+MeSH_id=`yq .input.mesh_id "${CONFIG}"`
+# MeSH_id=`cat ${gwas_mesh} | awk -F "\t" -v trait_name="${trait_name}" '{if ($1 == trait_name) print $3}'`
 # MeSH_id="NA"
 
 # T2D
