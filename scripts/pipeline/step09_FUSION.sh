@@ -1,0 +1,10 @@
+#!/bin/bash
+set -e
+
+CONFIG=$1
+GAMMA_HOME=$(eval echo $(yq .input.GAMMA_HOME "${CONFIG}"))
+trait_name=$(eval echo $(yq .input.trait "${CONFIG}"))
+SCRIPT_DIR=$(eval echo $(yq .script.path "${CONFIG}"))
+
+bash ${SCRIPT_DIR}/L2G/FUSION_step1.sh ${CONFIG}
+bash ${SCRIPT_DIR}/L2G/FUSION_step2.sh ${CONFIG}

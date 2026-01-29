@@ -5,10 +5,11 @@ set -e
 #  Input
 # ------------------------------------------------------------------------
 CONFIG=$1
-SCRIPT_DIR=`yq .script.path "${CONFIG}"`
-GWAS_DATA=`yq .input.gwas "${CONFIG}"`
-trait_name=`yq .input.trait "${CONFIG}"`
-OUTPUT=`yq .input.output "${CONFIG}"`
+GAMMA_HOME=$(eval echo $(yq .input.GAMMA_HOME "${CONFIG}"))
+SCRIPT_DIR=$(eval echo $(yq .script.path "${CONFIG}"))
+GWAS_DATA=$(eval echo $(yq .input.gwas "${CONFIG}"))
+trait_name=$(eval echo $(yq .input.trait "${CONFIG}"))
+OUTPUT=$(eval echo $(yq .input.output "${CONFIG}"))
 
 mkdir -p ${OUTPUT}/FUSION/GWAS_munged
 mkdir -p ${OUTPUT}/FUSION/detail
@@ -17,11 +18,11 @@ mkdir -p ${OUTPUT}/FUSION/summary
 # ------------------------------------------------------------------------
 #  FUSION analysis
 # ------------------------------------------------------------------------
-env=`yq .environment.R_421 "${CONFIG}"`
-FUSION=`yq .software.fusion "${CONFIG}"`
-LDSC_resources_dir=`yq .fusion.ldsc_resources_dir "${CONFIG}"`
-LDREF=`yq .fusion.LDREF "${CONFIG}"`
-QTL_list=`yq .fusion.QTL_list "${CONFIG}"`
+env=$(eval echo $(yq .environment.R_421 "${CONFIG}"))
+FUSION=$(eval echo $(yq .software.fusion "${CONFIG}"))
+LDSC_resources_dir=$(eval echo $(yq .fusion.ldsc_resources_dir "${CONFIG}"))
+LDREF=$(eval echo $(yq .fusion.LDREF "${CONFIG}"))
+QTL_list=$(eval echo $(yq .fusion.QTL_list "${CONFIG}"))
 source activate ${env}
 
 
@@ -36,7 +37,7 @@ echo "Starting FUSION analysis for QTL set ${qtl_i} ..."
 echo "${GTEx_tissue}"
 
 # for i in $(seq 1 22); do
-chr=`yq .input.chr "${CONFIG}"`
+chr=$(eval echo $(yq .input.chr "${CONFIG}"))
 i=${chr}
 
 

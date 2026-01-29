@@ -5,10 +5,11 @@ set -e
 #  Input
 # ------------------------------------------------------------------------
 CONFIG=$1
-SCRIPT_DIR=`yq .script.path "${CONFIG}"`
-GWAS_DATA=`yq .input.gwas "${CONFIG}"`
-trait_name=`yq .input.trait "${CONFIG}"`
-OUTPUT=`yq .input.output "${CONFIG}"`
+GAMMA_HOME=$(eval echo $(yq .input.GAMMA_HOME "${CONFIG}"))
+SCRIPT_DIR=$(eval echo $(yq .script.path "${CONFIG}"))
+GWAS_DATA=$(eval echo $(yq .input.gwas "${CONFIG}"))
+trait_name=$(eval echo $(yq .input.trait "${CONFIG}"))
+OUTPUT=$(eval echo $(yq .input.output "${CONFIG}"))
 
 mkdir -p ${OUTPUT}/Network/summary
 mkdir -p ${OUTPUT}/Network/score
@@ -19,10 +20,10 @@ mkdir -p ${OUTPUT}/Network/plot
 # ------------------------------------------------------------------------
 #  Network analysis
 # ------------------------------------------------------------------------
-R_functions=`yq .software.R_functions "${CONFIG}"`
-gamma_gene=`yq .gene.gamma_gene "${CONFIG}"`
+R_functions=$(eval echo $(yq .software.R_functions "${CONFIG}"))
+gamma_gene=$(eval echo $(yq .gene.gamma_gene "${CONFIG}"))
 
-env=`yq .environment.R_421 "${CONFIG}"`
+env=$(eval echo $(yq .environment.R_421 "${CONFIG}"))
 source activate $env
 Rscript  ${SCRIPT_DIR}/Network/Network_summary.R \
 	${trait_name} \

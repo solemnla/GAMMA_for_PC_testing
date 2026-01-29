@@ -5,10 +5,11 @@ set -e
 #  Input
 # ------------------------------------------------------------------------
 CONFIG=$1
-SCRIPT_DIR=`yq .script.path "${CONFIG}"`
-GWAS_DATA=`yq .input.gwas "${CONFIG}"`
-trait_name=`yq .input.trait "${CONFIG}"`
-OUTPUT=`yq .input.output "${CONFIG}"`
+GAMMA_HOME=$(eval echo $(yq .input.GAMMA_HOME "${CONFIG}"))
+SCRIPT_DIR=$(eval echo $(yq .script.path "${CONFIG}"))
+GWAS_DATA=$(eval echo $(yq .input.gwas "${CONFIG}"))
+trait_name=$(eval echo $(yq .input.trait "${CONFIG}"))
+OUTPUT=$(eval echo $(yq .input.output "${CONFIG}"))
 
 mkdir -p ${OUTPUT}/MR/GSMR/detail
 mkdir -p ${OUTPUT}/MR/GSMR/summary
@@ -17,30 +18,34 @@ mkdir -p ${OUTPUT}/MR/GSMR/results
 # ------------------------------------------------------------------------
 # Other MR analysis
 # ------------------------------------------------------------------------
-MR_snp_min=`yq .mr.MR_snp_min "${CONFIG}"`
+MR_snp_min=$(eval echo $(yq .mr.MR_snp_min "${CONFIG}"))
 default_MR_snp_min=3
 MR_snp_min=${MR_snp_min:-$default_MR_snp_min}
 
 default_batch_num=10
-batch_num=`yq .mr.batch_num "${CONFIG}"`
+batch_num=$(eval echo $(yq .mr.batch_num "${CONFIG}"))
 batch_num=${batch_num:-$default_batch_num}
 
-QTL_clumped_list=`yq .mr.GSMR_QTL_clumped_list "${CONFIG}"`
+QTL_clumped_list=$(eval echo $(yq .mr.GSMR_QTL_clumped_list "${CONFIG}"))
 
 # -------------------------------
 # QTL clumped results
 # qtl_i=${SLURM_ARRAY_TASK_ID}
+
+# For demo, only run 1 dataset.
 qtl_i=6
 
-qtl_name=`awk -F "\t" -v row=$qtl_i 'NR==row {print $1}' $QTL_clumped_list`
-qtl_clumpled_file=`awk -F "\t" -v row=$qtl_i 'NR==row {print $2}' $QTL_clumped_list`
+# qtl_name=`awk -F "\t" -v row=$qtl_i 'NR==row {print $1}' $QTL_clumped_list`
+# qtl_clumpled_file=`awk -F "\t" -v row=$qtl_i 'NR==row {print $2}' $QTL_clumped_list`
+qtl_name=$(awk -F "\t" -v row=$qtl_i 'NR==row {print $1}' $QTL_clumped_list)
+qtl_clumpled_file=$(eval echo $(awk -F "\t" -v row=$qtl_i 'NR==row {print $2}' $QTL_clumped_list))
 
 if [ -z "$qtl_name" ]; then
     echo "no QTL in line $qtl_i, skip"
     exit 0
 fi
 
-env=`yq .environment.R_421 "${CONFIG}"`
+env=$(eval echo $(yq .environment.R_421 "${CONFIG}"))
 source activate $env
 
 

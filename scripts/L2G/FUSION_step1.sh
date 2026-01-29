@@ -5,10 +5,11 @@ set -e
 #  Input
 # ------------------------------------------------------------------------
 CONFIG=$1
-SCRIPT_DIR=`yq .script.path "${CONFIG}"`
-GWAS_DATA=`yq .input.gwas "${CONFIG}"`
-trait_name=`yq .input.trait "${CONFIG}"`
-OUTPUT=`yq .input.output "${CONFIG}"`
+GAMMA_HOME=$(eval echo $(yq .input.GAMMA_HOME "${CONFIG}"))
+SCRIPT_DIR=$(eval echo $(yq .script.path "${CONFIG}"))
+GWAS_DATA=$(eval echo $(yq .input.gwas "${CONFIG}"))
+trait_name=$(eval echo $(yq .input.trait "${CONFIG}"))
+OUTPUT=$(eval echo $(yq .input.output "${CONFIG}"))
 
 mkdir -p ${OUTPUT}/FUSION/GWAS_munged
 mkdir -p ${OUTPUT}/FUSION/detail
@@ -18,11 +19,11 @@ mkdir -p ${OUTPUT}/FUSION/summary
 #  FUSION analysis
 # ------------------------------------------------------------------------
 # step1: Munge GWAS summary data
-env=`yq .environment.python_ldsc "${CONFIG}"`
+env=$(eval echo $(yq .environment.python_ldsc "${CONFIG}"))
 source activate ${env}
 
-munge_sumstats=`yq .fusion.munge_sumstats "${CONFIG}"`
-LDSC_resources_dir=`yq .fusion.ldsc_resources_dir "${CONFIG}"`
+munge_sumstats=$(eval echo $(yq .fusion.munge_sumstats "${CONFIG}"))
+LDSC_resources_dir=$(eval echo $(yq .fusion.ldsc_resources_dir "${CONFIG}"))
 
 # ----
 which python

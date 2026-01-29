@@ -5,10 +5,11 @@ set -e
 #  Input
 # ------------------------------------------------------------------------
 CONFIG=$1
-SCRIPT_DIR=`yq .script.path "${CONFIG}"`
-GWAS_DATA=`yq .input.gwas "${CONFIG}"`
-trait_name=`yq .input.trait "${CONFIG}"`
-OUTPUT=`yq .input.output "${CONFIG}"`
+GAMMA_HOME=$(eval echo $(yq .input.GAMMA_HOME "${CONFIG}"))
+SCRIPT_DIR=$(eval echo $(yq .script.path "${CONFIG}"))
+GWAS_DATA=$(eval echo $(yq .input.gwas "${CONFIG}"))
+trait_name=$(eval echo $(yq .input.trait "${CONFIG}"))
+OUTPUT=$(eval echo $(yq .input.output "${CONFIG}"))
 
 mkdir -p ${OUTPUT}/DEPICT/GWAS_input
 mkdir -p ${OUTPUT}/DEPICT/cfg
@@ -18,12 +19,12 @@ mkdir -p ${OUTPUT}/DEPICT/output
 # ------------------------------------------------------------------------
 # DEPICT analysis
 # ------------------------------------------------------------------------
-DEPICT=`yq .software.depict "${CONFIG}"`
-snp_loc_GRCh37=`yq .depict.snp_loc_GRCh37 "${CONFIG}"`
-cfg_demo=`yq .depict.cfg_demo "${CONFIG}"`
-env=`yq .environment.python_depict "${CONFIG}"`
+DEPICT=$(eval echo $(yq .software.depict "${CONFIG}"))
+snp_loc_GRCh37=$(eval echo $(yq .depict.snp_loc_GRCh37 "${CONFIG}"))
+cfg_demo=$(eval echo $(yq .depict.cfg_demo "${CONFIG}"))
+env=$(eval echo $(yq .environment.python_depict "${CONFIG}"))
 source activate ${env}
-plink1_9=`yq .software.plink1_9 "${CONFIG}"`
+plink1_9=$(eval echo $(yq .software.plink1_9 "${CONFIG}"))
 
 
 awk -v OFS='\t' 'NR == FNR {value[$1] = $2 OFS $3; next} {print $0, value[$1]}' ${snp_loc_GRCh37} ${GWAS_DATA} > ${OUTPUT}/DEPICT/GWAS_input/${trait_name}_depict.txt

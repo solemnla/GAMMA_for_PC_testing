@@ -12,6 +12,7 @@ conda env create -f ./environments/GAMMA_depict.yml && \
 #     R -e 'remotes::install_github(\"gabraham/plink2R\", subdir=\"plink2R\", ref=\"master\")' && \
 #     R -e 'remotes::install_github(\"cotsapaslab/jlim\", subdir=\"jlimR\", ref=\"master\")'"
 
+# Adjust the R repos that suits you.
 bash ./environments/GAMMA_r.sh && \
     /bin/bash -c "source activate GAMMA_r && \
     R -e 'install.packages(c(\"htmltools\", \"remotes\"), repos=\"https://cran.r-project.org\")' && \

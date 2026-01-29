@@ -1,4 +1,5 @@
 #Adjust the input before running the code.
+#Adjust QTL_list files for a different set of QTLs.
 input:
   GAMMA_HOME: "/home/sunshufeng/GAMMA_for_PC_testing"
   trait: "T2D_chr11"
@@ -25,6 +26,7 @@ software:
   plink2: "${GAMMA_HOME}/softwares/plink2"
   gcta: "${GAMMA_HOME}/softwares/gcta-1.94.1"
   smr: "${GAMMA_HOME}/softwares/smr-1.3.2-alpha7-linux"
+  smr_lib: "${GAMMA_HOME}/softwares/libstdcxx-ng-12.2.0/lib"
   fusion: "${GAMMA_HOME}/softwares/FUSION.assoc_test.R"
   coloc: "${GAMMA_HOME}/softwares/COLOC.R"
   magma: "${GAMMA_HOME}/softwares/magma"
@@ -104,3 +106,12 @@ gamma:
   pharmaprojects_0507_shufeng: "${GAMMA_HOME}/data/gamma/pharmap_processed.csv"
 mesh:
   gwas_mesh: "${GAMMA_HOME}/data/gamma/trait_mapping_latest.txt"
+model_data:
+  omim: "${GAMMA_HOME}/data/machine_learning/OMIM_processed.csv"
+  clinvar: "${GAMMA_HOME}/data/machine_learning/clinvar.csv"
+  mgi: "${GAMMA_HOME}/data/machine_learning/MGI_processed2.csv"
+  gene_features: "${GAMMA_HOME}/data/machine_learning/0.0.3_gene_features.csv"
+  uniprot: "${GAMMA_HOME}/data/machine_learning/0.0.5_uniprot_protein_family.csv"
+model_model:
+  model: "${GAMMA_HOME}/data/machine_learning/0.0.1_model.pth"
+  scaler: "${GAMMA_HOME}/data/machine_learning/0.0.2_scaler.pkl"

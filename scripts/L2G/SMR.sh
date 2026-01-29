@@ -5,10 +5,11 @@ set -e
 #  Input
 # ------------------------------------------------------------------------
 CONFIG=$1
-SCRIPT_DIR=`yq .script.path "${CONFIG}"`
-GWAS_DATA=`yq .input.gwas "${CONFIG}"`
-trait_name=`yq .input.trait "${CONFIG}"`
-OUTPUT=`yq .input.output "${CONFIG}"`
+GAMMA_HOME=$(eval echo $(yq .input.GAMMA_HOME "${CONFIG}"))
+SCRIPT_DIR=$(eval echo $(yq .script.path "${CONFIG}"))
+GWAS_DATA=$(eval echo $(yq .input.gwas "${CONFIG}"))
+trait_name=$(eval echo $(yq .input.trait "${CONFIG}"))
+OUTPUT=$(eval echo $(yq .input.output "${CONFIG}"))
 
 mkdir -p ${OUTPUT}/SMR/detail
 mkdir -p ${OUTPUT}/SMR/summary
@@ -18,19 +19,19 @@ mkdir -p ${OUTPUT}/SMR/SMR_Portal
 # ------------------------------------------------------------------------
 #  SMR analysis
 # ------------------------------------------------------------------------
+SMR_LIB=$(eval echo $(yq .software.smr_lib "${CONFIG}"))
+SMR=$(eval echo $(yq .software.smr "${CONFIG}"))
+REFERENCE=$(eval echo $(yq .reference.reference_bfile "${CONFIG}"))
+QTL_list=$(eval echo $(yq .magic.QTL_list "${CONFIG}"))
 
-SMR=`yq .software.smr "${CONFIG}"`
-REFERENCE=`yq .reference.reference_bfile "${CONFIG}"`
-QTL_list=`yq .magic.QTL_list "${CONFIG}"`
-
-maf=`yq .smr.maf "${CONFIG}"`
-peqtl_smr=`yq .smr.peqtl_smr "${CONFIG}"`
-peqtl_heidi=`yq .smr.peqtl_heidi "${CONFIG}"`
-batch_num=`yq .smr.batch_num "${CONFIG}"`
-smr_multi_index=`yq .smr.smr_multi_index "${CONFIG}"`
-smr_heidi_index=`yq .smr.heidi_index "${CONFIG}"`
-magic_smr_multi_index=`yq .magic.smr_multi_index "${CONFIG}"`
-magic_smr_heidi_index=`yq .magic.heidi_index "${CONFIG}"`
+maf=$(eval echo $(yq .smr.maf "${CONFIG}"))
+peqtl_smr=$(eval echo $(yq .smr.peqtl_smr "${CONFIG}"))
+peqtl_heidi=$(eval echo $(yq .smr.peqtl_heidi "${CONFIG}"))
+batch_num=$(eval echo $(yq .smr.batch_num "${CONFIG}"))
+smr_multi_index=$(eval echo $(yq .smr.smr_multi_index "${CONFIG}"))
+smr_heidi_index=$(eval echo $(yq .smr.heidi_index "${CONFIG}"))
+magic_smr_multi_index=$(eval echo $(yq .magic.smr_multi_index "${CONFIG}"))
+magic_smr_heidi_index=$(eval echo $(yq .magic.heidi_index "${CONFIG}"))
 
 default_maf=0.01
 default_peqtl_smr=5e-8
@@ -53,7 +54,7 @@ fi
 
 # ------------------------------------------------------------------------
 # run MAGIC Portal or SMR Portal analysis
-run_magic_index=`yq .magic.run_magic_index "${CONFIG}"`
+run_magic_index=$(eval echo $(yq .magic.run_magic_index "${CONFIG}"))
 if [ "$run_magic_index" = "TRUE" ]; then
     echo "--------------------------- Running MAGIC Portal ---------------------------"
     smr_multi_index=$magic_smr_multi_index
@@ -90,6 +91,11 @@ for qtl_i in $(seq 1 $qtl_num); do
     qtl_name=`awk -F "\t" -v row=$qtl_i 'NR==row {print $1}' $QTL_list`
     qtl_data=`awk -F "\t" -v row=$qtl_i 'NR==row {print $2}' $QTL_list`
     qtl_chr=`awk -F "\t" -v row=$qtl_i 'NR==row {print $3}' $QTL_list`
+    
+    # For the sake of demo
+    qtl_data=$(eval echo ${qtl_data})
+    echo ${qtl_data}
+    #
 
     echo "Processing QTL $qtl_i / $qtl_num ..."
     echo "QTL name: $qtl_name"
@@ -103,8 +109,11 @@ fi
 SMR_summary_file="${OUTPUT}/SMR/summary/${trait_name}_${qtl_name}_chrALL.msmr"
 if [ ! -f "${SMR_summary_file}" ] || [ ! -s "${SMR_summary_file}" ]; then
 
+# Set LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=${SMR_LIB}:$LD_LIBRARY_PATH
+
 # for i in $(seq 1 22); do
-    chr=`yq .input.chr "${CONFIG}"`
+    chr=$(eval echo $(yq .input.chr "${CONFIG}"))
     i=${chr}
     if [ "$qtl_chr" = "TRUE" ]; then
         QTL_data="${qtl_data}${i}"

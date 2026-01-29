@@ -27,9 +27,9 @@ MR_lasso<-function(betaYG,betaXG,sebetaYG){
 all_mr = function(bzx, bzx_se, bzx_pval, bzy, bzy_se, bzy_pval, method, nsnps_thresh=10){
 ### Different methods for Mendelian Randomization analysis
 ### "GSMR_heidi", "GSMR_noheidi", "IVW", "Median", "Mode", "Egger", "Robust", "Lasso", "RAPS", "PRESSO", "MRMix", "Con-Mix"
-    suppressMessages({library(MRMix);library(MendelianRandomization)
-    library(mr.raps);library(MRPRESSO);library(penalized)
-    library(survey)})
+    #suppressMessages({library(MRMix);library(MendelianRandomization)
+    #library(mr.raps);library(MRPRESSO);library(penalized)
+    #library(survey)})
 names(bzx)=1:length(bzx)
 n1a=10000
     if(method=="GSMR_heidi_v1"){
