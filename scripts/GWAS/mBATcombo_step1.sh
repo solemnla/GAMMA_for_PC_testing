@@ -5,10 +5,12 @@ set -e
 #  Input
 # ------------------------------------------------------------------------
 CONFIG=$1
-SCRIPT_DIR=`yq .script.path "${CONFIG}"`
-GWAS_DATA=`yq .input.gwas "${CONFIG}"`
-trait_name=`yq .input.trait "${CONFIG}"`
-OUTPUT=`yq .input.output "${CONFIG}"`
+GAMMA_HOME=$(eval echo $(yq .input.GAMMA_HOME "${CONFIG}"))
+
+SCRIPT_DIR=$(eval echo $(yq .script.path "${CONFIG}"))
+GWAS_DATA=$(eval echo $(yq .input.gwas "${CONFIG}"))
+trait_name=$(eval echo $(yq .input.trait "${CONFIG}"))
+OUTPUT=$(eval echo $(yq .input.output "${CONFIG}"))
 
 
 mkdir -p ${OUTPUT}/mBATcombo/detail
@@ -17,12 +19,12 @@ mkdir -p ${OUTPUT}/mBATcombo/summary
 # ------------------------------------------------------------------------
 #  mBATcombo analysis
 # ------------------------------------------------------------------------
-GCTA=`yq .software.gcta "${CONFIG}"`
-REFERENCE=`yq .reference.reference_bfile "${CONFIG}"`
-gene_list=`yq .mBAT.gene_list "${CONFIG}"`
+GCTA=$(eval echo $(yq .software.gcta "${CONFIG}"))
+REFERENCE=$(eval echo $(yq .reference.reference_bfile "${CONFIG}"))
+gene_list=$(eval echo $(yq .mBAT.gene_list "${CONFIG}"))
 
 # ----
-chr=`yq .input.chr "${CONFIG}"`
+chr=$(eval echo $(yq .input.chr "${CONFIG}"))
 i=${chr}
 # i=${SLURM_ARRAY_TASK_ID}
 ${GCTA} --bfile ${REFERENCE}_chr${i} \

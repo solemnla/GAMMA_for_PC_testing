@@ -5,10 +5,11 @@ set -e
 #  Input
 # ------------------------------------------------------------------------
 CONFIG=$1
-SCRIPT_DIR=`yq .script.path "${CONFIG}"`
-GWAS_DATA=`yq .input.gwas "${CONFIG}"`
-trait_name=`yq .input.trait "${CONFIG}"`
-OUTPUT=`yq .input.output "${CONFIG}"`
+GAMMA_HOME=$(eval echo $(yq .input.GAMMA_HOME "${CONFIG}"))
+SCRIPT_DIR=$(eval echo $(yq .script.path "${CONFIG}"))
+GWAS_DATA=$(eval echo $(yq .input.gwas "${CONFIG}"))
+trait_name=$(eval echo $(yq .input.trait "${CONFIG}"))
+OUTPUT=$(eval echo $(yq .input.output "${CONFIG}"))
 
 
 # ------------------------------------------------------------------------
@@ -27,7 +28,7 @@ OUTPUT=`yq .input.output "${CONFIG}"`
 # done
 
 
-chr=`yq .input.chr "${CONFIG}"`
+chr=$(eval echo $(yq .input.chr "${CONFIG}"))
 head -n 1 ${OUTPUT}/MAGMA/detail/${trait_name}_chr${chr}.genes.out > ${OUTPUT}/MAGMA/summary/${trait_name}_chrALL.genes.out
 # for chr in {1..22}
 # do

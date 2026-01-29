@@ -5,12 +5,13 @@ set -e
 #  Input
 # ------------------------------------------------------------------------
 CONFIG=$1
+GAMMA_HOME=$(eval echo $(yq .input.GAMMA_HOME "${CONFIG}"))
+SCRIPT_DIR=$(eval echo $(yq .script.path "${CONFIG}"))
+GWAS_DATA=$(eval echo $(yq .input.gwas "${CONFIG}"))
+trait_name=$(eval echo $(yq .input.trait "${CONFIG}"))
+OUTPUT=$(eval echo $(yq .input.output "${CONFIG}"))
+clump_field=$(eval echo $(yq .clumping.field "${CONFIG}"))
 
-SCRIPT_DIR=`yq .script.path "${CONFIG}"`
-GWAS_DATA=`yq .input.gwas "${CONFIG}"`
-trait_name=`yq .input.trait "${CONFIG}"`
-OUTPUT=`yq .input.output "${CONFIG}"`
-clump_field=`yq .clumping.field "${CONFIG}"`
 if [ "$clump_field" = "null" ]; then
   clump_field="p"
 fi
@@ -24,11 +25,11 @@ mkdir -p ${OUTPUT}/Clumping/summary
 # ------------------------------------------------------------------------
 
  
-plink1_9=`yq .software.plink1_9 "${CONFIG}"`
-REFERENCE=`yq .reference.reference_bfile "${CONFIG}"`
+plink1_9=$(eval echo $(yq .software.plink1_9 "${CONFIG}"))
+REFERENCE=$(eval echo $(yq .reference.reference_bfile "${CONFIG}"))
 
 # ----
-chr=`yq .input.chr "${CONFIG}"`
+chr=$(eval echo $(yq .input.chr "${CONFIG}"))
 i=${chr}
 # i=${SLURM_ARRAY_TASK_ID}
 ${plink1_9} \

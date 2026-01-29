@@ -5,10 +5,12 @@ set -e
 #  Input
 # ------------------------------------------------------------------------
 CONFIG=$1
-SCRIPT_DIR=`yq .script.path "${CONFIG}"`
-GWAS_DATA=`yq .input.gwas "${CONFIG}"`
-trait_name=`yq .input.trait "${CONFIG}"`
-OUTPUT=`yq .input.output "${CONFIG}"`
+GAMMA_HOME=$(eval echo $(yq .input.GAMMA_HOME "${CONFIG}"))
+
+SCRIPT_DIR=$(eval echo $(yq .script.path "${CONFIG}"))
+GWAS_DATA=$(eval echo $(yq .input.gwas "${CONFIG}"))
+trait_name=$(eval echo $(yq .input.trait "${CONFIG}"))
+OUTPUT=$(eval echo $(yq .input.output "${CONFIG}"))
 
 
 mkdir -p ${OUTPUT}/Wu_adj/LD
@@ -19,14 +21,14 @@ mkdir -p ${OUTPUT}/Wu_adj/summary
 # ------------------------------------------------------------------------
 # Wu_adj analysis
 # ------------------------------------------------------------------------
-reference_bfile=`yq .reference.reference_bfile "${CONFIG}"`
-reference_all_bim=`yq .reference.reference_all_bim "${CONFIG}"`
-reference_freq=`yq .reference.reference_freq "${CONFIG}"`
+reference_bfile=$(eval echo $(yq .reference.reference_bfile "${CONFIG}"))
+reference_all_bim=$(eval echo $(yq .reference.reference_all_bim "${CONFIG}"))
+reference_freq=$(eval echo $(yq .reference.reference_freq "${CONFIG}"))
 
-plink1_9=`yq .software.plink1_9 "${CONFIG}"`
-plink2=`yq .software.plink2 "${CONFIG}"`
+plink1_9=$(eval echo $(yq .software.plink1_9 "${CONFIG}"))
+plink2=$(eval echo $(yq .software.plink2 "${CONFIG}"))
 
-env=`yq .environment.R_421 "${CONFIG}"`
+env=$(eval echo $(yq .environment.R_421 "${CONFIG}"))
 source activate $env
 
 # --------------------------

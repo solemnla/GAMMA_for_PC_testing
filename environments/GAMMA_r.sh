@@ -26,6 +26,7 @@ conda install -c conda-forge r-glmnet r-rcpparmadillo r-rcppgsl -y
 
 # Install Bioconductor packages batch 5
 echo "Installing Bioconductor packages (batch 5)..."
+conda install -c conda-forge jq -y
 conda install -c bioconda bioconductor-genomeinfodb bioconductor-iranges bioconductor-s4vectors -y
 
 # Install reporting packages batch 6

@@ -5,10 +5,11 @@ set -e
 #  Input
 # ------------------------------------------------------------------------
 CONFIG=$1
-SCRIPT_DIR=`yq .script.path "${CONFIG}"`
-GWAS_DATA=`yq .input.gwas "${CONFIG}"`
-trait_name=`yq .input.trait "${CONFIG}"`
-OUTPUT=`yq .input.output "${CONFIG}"`
+GAMMA_HOME=$(eval echo $(yq .input.GAMMA_HOME "${CONFIG}"))
+SCRIPT_DIR=$(eval echo $(yq .script.path "${CONFIG}"))
+GWAS_DATA=$(eval echo $(yq .input.gwas "${CONFIG}"))
+trait_name=$(eval echo $(yq .input.trait "${CONFIG}"))
+OUTPUT=$(eval echo $(yq .input.output "${CONFIG}"))
 
 mkdir -p ${OUTPUT}/MAGMA/detail
 mkdir -p ${OUTPUT}/MAGMA/summary
@@ -16,12 +17,12 @@ mkdir -p ${OUTPUT}/MAGMA/summary
 # ------------------------------------------------------------------------
 #  MAGMA analysis
 # ------------------------------------------------------------------------
-MAGMA=`yq .software.magma "${CONFIG}"`
-REFERENCE=`yq .reference.reference_bfile_GRCh37 "${CONFIG}"`
-gene_annot=`yq .magma.gene_annot "${CONFIG}"`
+MAGMA=$(eval echo $(yq .software.magma "${CONFIG}"))
+REFERENCE=$(eval echo $(yq .reference.reference_bfile_GRCh37 "${CONFIG}"))
+gene_annot=$(eval echo $(yq .magma.gene_annot "${CONFIG}"))
 
 # ----
-chr=`yq .input.chr "${CONFIG}"`
+chr=$(eval echo $(yq .input.chr "${CONFIG}"))
 i=${chr}
 # i=${SLURM_ARRAY_TASK_ID}
 ${MAGMA} \

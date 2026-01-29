@@ -18,3 +18,8 @@ bash ./environments/GAMMA_r.sh && \
     R -e 'devtools::install_github(\"ZikunY/CARMA\")' && \
     R -e 'remotes::install_github(\"gabraham/plink2R\", subdir=\"plink2R\", ref=\"master\")' && \
     R -e 'remotes::install_github(\"cotsapaslab/jlim\", subdir=\"jlimR\", ref=\"master\")'"
+
+# Download yq release
+wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O ~/.local/bin/yq
+chmod +x ~/.local/bin/yq
+yq --version
