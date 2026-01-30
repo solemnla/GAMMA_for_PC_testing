@@ -96,7 +96,7 @@ pops:
   pops_feature: "${GAMMA_HOME}/data/pops/pops_all_features_munged/all_pops_features"
   control_feature: "${GAMMA_HOME}/data/pops/features_jul17_control.txt"
 depict:
-  snp_loc_GRCh37: "${GAMMA_HOME}/data/depict/snp_loc_b37"
+  snp_loc_GRCh37: "${GAMMA_HOME}/data/depict/snp_loc_b37_chr11.txt"
   cfg_demo: "${GAMMA_HOME}/data/depict/demo.cfg"
 rwr_ppr:
   ppi_file: "${GAMMA_HOME}/data/rwr_ppr/PPI_all.csv"

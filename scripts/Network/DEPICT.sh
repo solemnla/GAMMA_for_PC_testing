@@ -26,8 +26,15 @@ env=$(eval echo $(yq .environment.python_depict "${CONFIG}"))
 source activate ${env}
 plink1_9=$(eval echo $(yq .software.plink1_9 "${CONFIG}"))
 
-
-awk -v OFS='\t' 'NR == FNR {value[$1] = $2 OFS $3; next} {print $0, value[$1]}' ${snp_loc_GRCh37} ${GWAS_DATA} > ${OUTPUT}/DEPICT/GWAS_input/${trait_name}_depict.txt
+wk -v OFS='\t' '
+    NR == FNR {
+        gwas[$1] = $0; 
+        next
+    } 
+    ($1 in gwas) {
+        print gwas[$1], $2, $3
+    }
+' ${GWAS_DATA} ${snp_loc_GRCh37} > ${OUTPUT}/DEPICT/GWAS_input/${trait_name}_depict.txt
 awk -v OFS='\t' '{if($9 != "Y" && $9 != "X" && $9 != "" && $10 != "" && $7 != "NA" && $1 != "NA") print $1, $9,$10,$7}' ${OUTPUT}/DEPICT/GWAS_input/${trait_name}_depict.txt > ${OUTPUT}/DEPICT/GWAS_input/${trait_name}_depict.clean.txt
 sed -i $'1 i \tSNP\tChr\tPos\tp' ${OUTPUT}/DEPICT/GWAS_input/${trait_name}_depict.clean.txt
 
