@@ -23,7 +23,7 @@ Download the test data from the link above and extract the data directory under 
 
 ```bash
 # Example extraction command
-tar -xzf downloaded_data.tar.gz -C GAMMA_for_PC_testing/
+tar -xzf GAMMA_test_data.tar.gz -C GAMMA_for_PC_testing/
 ```
 
 ### 2. Install Required Environment
@@ -58,7 +58,7 @@ A `results` directory will be generated under `GAMMA_for_PC_testing`.
 
 After successful execution, you can find:
 
-- **GAMMA summary data**: `results/GAMMA/feature/`
+- **GAMMA summary data**: `results/GAMMA/feature/T2D_chr11_GAMMA.feature`
 - **Machine learning scores**: `results/GAMMA/score/ML_score.csv`
 
 ## Directory Structure
