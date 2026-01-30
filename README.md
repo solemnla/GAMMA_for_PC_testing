@@ -51,7 +51,7 @@ Adjust the `deploy/GAMMA.yaml` file:
 
 ```yaml
 
-GAMMA_HOME=$(pwd)/GAMMA_for_PC_testing
+GAMMA_HOME=$(pwd)     # or/path/to/GAMMA_for_PC_testing
 CONFIG=${GAMMA_HOME}/deploy/GAMMA.yaml
 
 yq -i ".input.GAMMA_HOME = \"$GAMMA_HOME\"" "$CONFIG"
