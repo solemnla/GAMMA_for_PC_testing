@@ -50,14 +50,10 @@ Adjust the `deploy/GAMMA.yaml` file:
 - **Line 2**: Update the `GAMMA_HOME` path to the absolute path where your `GAMMA_for_PC_testing` directory is located
 
 ```yaml
-# demo yaml file
-CONFIG_demo="./deploy/GAMMA.yaml"
 
-current_dir=$(pwd)
-GAMMA_HOME="${current_dir}"
-CONFIG="${current_dir}/deploy/user.yaml"
+GAMMA_HOME=change/this/to/path/to/your/GAMMA_for_PC_testing
+CONFIG=${GAMMA_HOME}/deploy/GAMMA.yaml
 
-cp ${CONFIG_demo} ${CONFIG}
 yq -i ".input.GAMMA_HOME = \"$GAMMA_HOME\"" "$CONFIG"
 ```
 
@@ -66,7 +62,7 @@ yq -i ".input.GAMMA_HOME = \"$GAMMA_HOME\"" "$CONFIG"
 Execute the pipeline script:
 
 ```bash
-bash ./01_run_pipeline.sh
+bash ./01_run_pipeline.sh ${CONFIG}
 ```
 
 A `results` directory will be generated under `GAMMA_for_PC_testing`.

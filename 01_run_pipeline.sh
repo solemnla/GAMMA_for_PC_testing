@@ -1,6 +1,10 @@
 #!/bin/bash
 set -e
 
+CONFIG=$1
+GAMMA_HOME=$(eval echo $(yq .input.GAMMA_HOME "${CONFIG}"))
+cd ${GAMMA_HOME}
+
 # Run pipeline
 bash scripts/pipeline/step00_setup.sh ${CONFIG}
 bash scripts/pipeline/step01_Clumping.sh ${CONFIG} 
