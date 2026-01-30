@@ -12,12 +12,14 @@ This is a **DEMO version of GAMMA** designed for testing purposes. The demo has 
 ## Demo Data
 
 Download the test data from: 
+https://yanglab.westlake.edu.cn/data/gamma-download/GAMMA_test_data.tar.gz
 
 ## Tutorial
 
 Follow these steps to run the GAMMA demo:
 
 ### 0. Code initialization
+
 ```bash
 git clone https://github.com/solemnla/GAMMA_for_PC_testing.git
 cd GAMMA_for_PC_testing
@@ -30,7 +32,7 @@ Download the test data from the link above and extract the data directory under 
 
 ```bash
 # download demo data (T2D chr11 GWAS and other functional annotation data used in GAMMA analysis)
-wget link:demo_data_link....................
+wget https://yanglab.westlake.edu.cn/data/gamma-download/GAMMA_test_data.tar.gz
 tar -xvzf GAMMA_test_data.tar.gz
 ```
 
