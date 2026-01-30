@@ -17,13 +17,21 @@ Download the test data from:
 
 Follow these steps to run the GAMMA demo:
 
-### 1. Download and Extract Data
+### 0. Code initialization
+```bash
+git clone https://github.com/solemnla/GAMMA_for_PC_testing.git
+cd GAMMA_for_PC_testing
+chmod 754 ./00_environment_set_up.sh ./01_run_pipeline.sh
+```
+
+### 1. Download demo data
 
 Download the test data from the link above and extract the data directory under the `GAMMA_for_PC_testing` directory.
 
 ```bash
-# Example extraction command
-tar -xzf GAMMA_test_data.tar.gz -C GAMMA_for_PC_testing/
+# download demo data (T2D chr11 GWAS and other functional annotation data used in GAMMA analysis)
+wget link:demo_data_link....................
+tar -xvzf GAMMA_test_data.tar.gz
 ```
 
 ### 2. Install Required Environment
@@ -31,7 +39,7 @@ tar -xzf GAMMA_test_data.tar.gz -C GAMMA_for_PC_testing/
 Set up the required environment using the provided script:
 
 ```bash
-bash 00_environment_set_up.sh
+bash ./00_environment_set_up.sh
 ```
 
 ### 3. Configure GAMMA Home Path
@@ -40,8 +48,15 @@ Adjust the `deploy/GAMMA.yaml` file:
 - **Line 2**: Update the `GAMMA_HOME` path to the absolute path where your `GAMMA_for_PC_testing` directory is located
 
 ```yaml
-# Example:
-GAMMA_HOME: "/path/to/your/GAMMA_for_PC_testing"
+# demo yaml file
+CONFIG_demo="./deploy/GAMMA.yaml"
+
+current_dir=$(pwd)
+GAMMA_HOME="${current_dir}"
+CONFIG="${current_dir}/deploy/user.yaml"
+
+cp ${CONFIG_demo} ${CONFIG}
+yq -i ".input.GAMMA_HOME = \"$GAMMA_HOME\"" "$CONFIG"
 ```
 
 ### 4. Run the Pipeline
@@ -49,7 +64,7 @@ GAMMA_HOME: "/path/to/your/GAMMA_for_PC_testing"
 Execute the pipeline script:
 
 ```bash
-bash 01_run_pipeline.sh
+bash ./01_run_pipeline.sh
 ```
 
 A `results` directory will be generated under `GAMMA_for_PC_testing`.

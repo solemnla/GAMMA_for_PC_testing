@@ -1,11 +1,6 @@
 #!/bin/bash
 set -e
 
-# Set up config files
-CONFIG=/home/sunshufeng/GAMMA_for_PC_testing/deploy/GAMMA.yaml
-GAMMA_HOME=$(eval echo $(yq .input.GAMMA_HOME "${CONFIG}"))
-cd ${GAMMA_HOME}
-
 # Run pipeline
 bash scripts/pipeline/step00_setup.sh ${CONFIG}
 bash scripts/pipeline/step01_Clumping.sh ${CONFIG} 
