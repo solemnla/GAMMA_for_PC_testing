@@ -87,7 +87,8 @@ GAMMA_for_PC_testing/
 │       ├── feature/
 │           └── T2D_chr11_GAMMA.feature               # GAMMA summary data
 │       └── score/
-│           └── ML_score.csv      # Machine learning scores
+│           ├── ML_score.csv      # Machine learning scores
+│           └── T2D_chr11_GAMMA.summary               # GAMMA summary scores
 ├── scripts/
 ├── softwares/
 ├── 00_environment_set_up.sh      # Environment setup script

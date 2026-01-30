@@ -26,7 +26,7 @@ env=$(eval echo $(yq .environment.python_depict "${CONFIG}"))
 source activate ${env}
 plink1_9=$(eval echo $(yq .software.plink1_9 "${CONFIG}"))
 
-wk -v OFS='\t' '
+awk -v OFS='\t' '
     NR == FNR {
         gwas[$1] = $0; 
         next

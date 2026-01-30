@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+# CONFIG Example
+# CONFIG=/home/sunshufeng/GAMMA_for_PC_testing/deploy/GAMMA.yaml
+
 CONFIG=$1
 GAMMA_HOME=$(eval echo $(yq .input.GAMMA_HOME "${CONFIG}"))
 cd ${GAMMA_HOME}
