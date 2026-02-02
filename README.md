@@ -97,8 +97,8 @@ GAMMA_for_PC_testing/
 
 ## Notes
 
-- This demo is limited to chromosome 11 and a subset of xQTLs for demonstration purposes
-- For full functionality, please refer to the complete GAMMA implementation
+- This demo is restricted to chromosome 11 and a subset of xQTLs for demonstration purposes, please note that the results may differ from the complete version as (1) tissues not included may have more significant signals; (2) genes on other chromosomes may provide additional information for Network-based methods.
+- Running the full version on a local personal machine may not be feasible as (1) storage requirements exceed standard consumer hardware capacity; (2) processing time is prohibitive without a distributed computational framework or HPC. For full functionality, please refer to the complete GAMMA implementation at: https://gamma.westlakefuturegene.com. Where we provide an online platform for running the complete GAMMA pipeline.
 
 ## Support
 
